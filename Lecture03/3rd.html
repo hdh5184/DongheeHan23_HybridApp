@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <style>
+        body{
+            width : 1000px;
+            height: 600px;
+        }
+        .header{
+            background-color: green;
+            height: 140px;
+            padding: 30px;
+        }
+        .body_left{
+            background-color: grey;
+            width: 240px;
+            height: 400px;
+            padding: 30px;
+            float: left;
+        }
+        .body_right{
+            background-color: yellow;
+            width: 640px;
+            height: 400px;
+            padding: 30px;
+            float: left;
+        }
+        .body_button{
+            font-size: 20px;
+            width: 220px;
+            height: 40px;
+            margin: 10px;
+            
+        }
+        #loginButton{
+            font-size: 20px;
+            width: 100px;
+            height: 40px;
+        }
+        #logoutButton{
+            font-size: 20px;
+            width: 100px;
+            height: 40px;
+        }
+        #profileImage{
+            width : 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div id="loginDiv">
+            <label for="ID">아이디:</label>
+            <input type="text" id="ID" name="ID">
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" name="password">
+            <button id="loginButton" type="button">로그인</button>
+        </div>
+        <div id="userInfo" style="display: none;">
+            <img id="profileImage" src="IMG_0121.JPG" alt="프로필 사진">
+            <p id="nickname" style="padding-inline: 10px; margin: 0px;">ㅇㅇㅇ</p>
+            <button id="logoutButton" type="button">로그아웃</button>
+        </div>
+    </div>
+        <div class="body_left">
+            <button class="body_button" type="button"
+            onclick="showDocumentText(0)">버튼1</button>
+            <button class="body_button" type="button"
+            onclick="showDocumentText(1)">버튼2</button>
+            <button class="body_button" type="button"
+            onclick="showDocumentText(2)">버튼3</button>
+        </div>
+        <div class="body_right">
+            <div id="documentTextArea">
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+        const usernameInput = document.getElementById('ID');
+        const passwordInput = document.getElementById('password');
+        const loginButton = document.getElementById('loginButton');
+        const logoutButton = document.getElementById('logoutButton');
+
+        const loginDiv = document.getElementById('loginDiv'); //로그인 구간
+        const userInfoDiv = document.getElementById('userInfo'); //사용자 정보 구간
+
+        const myNickname = document.getElementById('nickname');
+
+        //아이디 비밀번호 저장
+        const userData = {
+            userID : "dongheehan",
+            userPassWord : "202027041",
+            userName : "한동희"
+        };
+
+        //로그인 버튼 클릭
+        loginButton.addEventListener('click', function (){
+            const inputID = usernameInput.value;
+            const inputPassWord = passwordInput.value;
+
+            //아이디 비밀번호 일치
+            if(inputID == userData.userID && inputPassWord == userData.userPassWord){
+                userInfo(); //사용자 정보 출현   
+                usernameInput.value = '';
+                passwordInput.value = '';
+            }
+            //아이디 비밀번호 불일치
+            else{
+                alert('아이디 또는 비밀번호를 다시 확인해주세요.');
+            }
+        });
+
+        //로그아웃 버튼 클릭
+        logoutButton.addEventListener('click', function (){
+            loginDiv.style.display = 'block'; //로그인 구간 출현
+            userInfoDiv.style.display = 'none'; //사용자 정보 숨김
+        });
+
+        function userInfo(){
+            loginDiv.style.display = 'none'; //로그인 구간 숨김
+            userInfoDiv.style.display = 'flex'; //사용자 정보 출현
+            myNickname.innerHTML = userData.userName; //저장된 닉네임 가져오기
+        };
+        
+        //오른쪽 출력 내용
+        const documentTextArea = document.getElementById('documentTextArea');
+
+        var confirmNum = 3;
+        var documentText = [];
+        documentText[0] = "대충 자기소개 내용";
+        documentText[1] = "대충 TMI";
+        documentText[2] = "";
+        documentText[3] = "";
+        
+        function showDocumentText(num){
+            if(documentTextArea.innerHTML == "저장되었습니다." && confirmNum == num){
+                alert('이미 저장되었습니다.');
+            }
+            else if(documentText[num] == ''){
+                documentText[num] = documentText[confirmNum];
+                documentText[confirmNum] = '';
+                documentTextArea.innerHTML = "저장되었습니다.";
+            }
+            else{
+                documentTextArea.innerHTML = documentText[num];
+            }
+            confirmNum = num;
+        }
+    </script>
+</body>
+</html>
