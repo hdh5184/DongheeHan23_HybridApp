@@ -1,4 +1,6 @@
 
+//////////////////// 앱 구성 함수 모음 ////////////////////
+
 // 이벤트 별 함수 실행
 document.addEventListener("mousemove", onMouseMove)
 document.addEventListener("mousedown", PlayerSpeedUp)
