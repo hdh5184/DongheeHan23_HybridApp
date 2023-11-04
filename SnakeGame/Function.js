@@ -1,15 +1,28 @@
 document.addEventListener("mousemove", onMouseMove)
 
-let Loop = setInterval(gameLoop, 1000 / 50)
-let time = 0;
 
-function gameLoop(){
+let Loop
+let LoopTime = 0;
+
+setInterval(Timer, 10)
+
+function InitGame(){
+    player = []
+    obstacle = []
+
+    player.push(new PlayerBodyObj())
+    player.push(new PlayerBodyObj())
+    player.push(new PlayerBodyObj())
+
+
+    Apple = new AppleObj()
+}
+
+function GameLoop(){
     Update()
     Compare()
     Draw()
-    
-    
-    time++;
+    LoopTime++;
 }
 
 function Update(){
@@ -20,10 +33,11 @@ function Update(){
 
     for (let i = 0; i < player.length; i++) {
         player[i].UpdatePos(i)
-        if(isgameover) {gameover(); break}
     }
 
-    
+    TimeLabel.textContent = "시간(초) : " + timer / 100
+    ScoreLabel.textContent = "뱀 길이 : " + player.length
+    difficultyLabel.textContent = "난이도(장애물 개수) : " + obstacle.length
 }
 
 function Draw(){
@@ -34,7 +48,6 @@ function Draw(){
         player[i].draw()
     }
     Apple.draw()
-    
 }
 
 function Compare(){
@@ -45,14 +58,20 @@ function Compare(){
             obstacle.push(new obstacleObj())
         }
     }
-    if(time % 1000 == 0) obstacle.push(new obstacleObj())
+    for (let i = 0; i < obstacle.length; i++) {
+        obstacle[i].CompareCrash()
+    }
+    if(LoopTime % 500 == 0) obstacle.push(new obstacleObj())
+    if(isgameover) gameover();
 }
 
 function gameover(){
-    // ctx.clearRect(0, 0, canvas.width, canvas.height)
-    // for (let i = 0; i < player.length; i++) {
-    //     player[i].draw()
-    // }
+    clearInterval(Loop)
+    isGameStart = false
+}
+
+function Timer(){
+    timer++
 }
 
 function onMouseMove(event){
@@ -61,9 +80,17 @@ function onMouseMove(event){
 }
 
 canvas.addEventListener('mousedown', function(event){
-    speed = 8
+    isSpeedUp = true
 })
 
 canvas.addEventListener('mouseup', function(event){
-    speed = 5
+    isSpeedUp = false
+})
+
+document.addEventListener('keydown', function(event){
+    if(event.key == 'Z' || event.key == 'z' || !isGameStart){
+        InitGame()
+        Loop = setInterval(GameLoop, 1000 / 50)
+        isGameStart = true
+    }
 })

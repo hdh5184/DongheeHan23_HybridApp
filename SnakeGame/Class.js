@@ -9,7 +9,10 @@ class PlayerBodyObj{
         }
         
         this.dirX = 0, this.dirY = 0
-        this.color = "#" + (0x40 + 0x30 * (player.length % 3)).toString(16).repeat(2) + "FF"
+        this.speed = 5
+        this.randomColor = (0x40 + 0x30 * (player.length % 3)).toString(16)
+        this.color = "#" + this.randomColor.repeat(2) + "FF"
+
 
         this.temp = []
         for (let i = 0; i < 5; i++) {
@@ -18,16 +21,19 @@ class PlayerBodyObj{
     }
 
     UpdatePos(index){
+        this.speed = (isSpeedUp) ? 9 : 5
+
         this.dirX = mouseX - this.PlayerPosX
         this.dirY = mouseY - this.PlayerPosY
-
+        
+        
         let scalar = Math.sqrt(this.dirX ** 2 + this.dirY ** 2)
         this.dirX /= scalar, this.dirY /= scalar
 
         if(scalar > 20){
             if(index == 0){
-                this.PlayerPosX += this.dirX * speed
-                this.PlayerPosY += this.dirY * speed
+                this.PlayerPosX += this.dirX * this.speed
+                this.PlayerPosY += this.dirY * this.speed
                 this.temp.push([this.PlayerPosX, this.PlayerPosY])
                 this.temp.shift()
 
@@ -44,7 +50,6 @@ class PlayerBodyObj{
                 player[i - 1].PlayerPosX = player[i - 1].temp[3][0]
                 player[i - 1].PlayerPosY = player[i - 1].temp[3][1]
             }
-            clearInterval(Loop)
             isgameover = true
             //gameover
         }
@@ -53,7 +58,7 @@ class PlayerBodyObj{
     draw(){
         ctx.beginPath()
         ctx.arc(this.PlayerPosX, this.PlayerPosY, 20, 0, 2*Math.PI)
-        ctx.fillStyle = this.color
+        ctx.fillStyle = (isSpeedUp) ? "#ff" + this.randomColor.repeat(2) : "#" + this.randomColor.repeat(2) + "ff"
         ctx.fill()
         ctx.beginPath()
     }
@@ -104,6 +109,8 @@ class AppleObj{
     }
 
     draw(){
+        this.color = "#ff" + (0x40 + 0x10 * (LoopTime % 9)).toString(16).repeat(2)
+
         ctx.beginPath()
         ctx.arc(this.ApplePosX, this.ApplePosY, 16, 0, 2*Math.PI)
         ctx.fillStyle = this.color
@@ -153,7 +160,6 @@ class obstacleObj{
                     this.dirY = (Math.random() * 8) - 4
                     break
         }
-        console.log(this.obstacleX, this.obstacleY)
     }
 
     MovingPos(){
@@ -162,50 +168,28 @@ class obstacleObj{
     }
 
     CompareOutCanvas(){
-        if(this.obstacleX < -50 || this.obstacleX > canvas.width + 50 ||
-            this.obstacleY < -50 || this.obstacleY > canvas.height + 50){
-                console.log("나감 : " + this.obstacleX + ' / ' + this.obstacleY)
-            }
         return this.obstacleX < -50 || this.obstacleX > canvas.width + 50 ||
                 this.obstacleY < -50 || this.obstacleY > canvas.height + 50
     }
 
-    // CompareGetApple(){
-    //     this.dirX = this.ApplePosX - player[0].PlayerPosX
-    //     this.dirY = this.ApplePosY - player[0].PlayerPosY
+    CompareCrash(){
+        var isCrash = false
 
-    //     let scalar = Math.sqrt(this.dirX ** 2 + this.dirY ** 2)
+        for (let i = 0; i < player.length; i++) {
+            var dirX = this.obstacleX - player[i].PlayerPosX
+            var dirY = this.obstacleY - player[i].PlayerPosY
 
-    //     if(scalar < 36){
-    //         this.SetPositionApple()
-    //         player.push(new PlayerBodyObj())
-    //     }
-    // }
+            var scalar = Math.sqrt(dirX ** 2 + dirY ** 2)
+            if(scalar < this.size + 20) {isCrash = true; break}
+            
+        }
 
-    // SetPositionApple(){
-    //     var isOverlappingPos = false
-
-    //     while(true){
-    //         this.ApplePosX = Math.random() * (canvas.width - 100) + 50
-    //         this.ApplePosY = Math.random() * (canvas.height - 100) + 50
-
-    //         for (let i = 0; i < player.length; i++) {
-    //             var dirX = this.ApplePosX - player[i].PlayerPosX
-    //             var dirY = this.ApplePosY - player[i].PlayerPosY
-        
-    //             var scalar = Math.sqrt(dirX ** 2 + dirY ** 2)
-    //             if(scalar < 36) {isOverlappingPos = true; break}
-    //         }
-    //         if(isOverlappingPos) {
-    //             isOverlappingPos = false
-    //             continue
-    //         }
-    //         else break
-    //     }
-    // }
+        if(isCrash) {
+            isgameover = true
+        }
+    }
 
     draw(){
-        
         ctx.beginPath()
         ctx.save()
 
@@ -241,8 +225,6 @@ class obstacleObj{
                 ctx.beginPath();
                 break
         }
-        
-        
         ctx.restore()
     }
 }
