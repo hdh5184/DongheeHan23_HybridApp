@@ -1,0 +1,126 @@
+body{
+    margin: 0px;
+    font-family: 'Noto Sans KR';
+}
+
+a{
+    text-decoration: none;
+}
+
+div{
+    
+}
+
+p{
+    margin: 0;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 300px;
+    background-image: url("img/Header_Backgroung_Image.png");
+    background-repeat: no-repeat;
+    background-size : contain;
+    background-position: center bottom;
+}
+
+.header_history{
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.header_button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 64px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#history{
+    display: flex; justify-content: center; align-items: center;
+    flex: 1;
+    height: 100%;
+    margin: 0px 16px;
+    border-radius: 40px;
+    text-align: center;
+    font-size: 28px;
+    background-color: #5E813F;
+    color: white;
+}
+
+#share{
+    display: flex; justify-content: center; align-items: center;
+    width: 56px; height: 56px;
+    margin-right: 16px;
+    border-radius: 40px;
+    text-align: center;
+    font-size: 28px;
+    background-color:gainsboro;
+    border: 2px solid gray;
+    color: black;
+}
+
+.middle{
+    width: 100%;
+    height: auto;
+}
+
+.current{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 32px 24px;
+}
+
+.current_date_month{
+    font-size: 16px;
+    line-height: 16px;
+    color: #7C621E;
+}
+
+.current_news{
+    margin: 8px 0px;
+    line-height: 28px;
+    font-size: 24px;
+    word-break: keep-all;
+}
+
+.footer{
+    position: fixed;
+    width: 100%;
+    height: 176px;
+    bottom: 0;
+    font-size: 20px;
+}
+
+.footer_button{
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 24px 24px;
+    height: auto;
+    vertical-align: bottom;
+}
+
+.footer_button_each{
+    color: black;
+    text-align: center;
+}
+
+#MyInfo, #News{
+    width: 64px;
+    height: auto;
+}
+
+#AddCup{
+    width: 96px;
+    height: auto;
+}
+
+@media screen and (max-width : 480px){
+}
