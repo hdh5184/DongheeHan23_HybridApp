@@ -14,6 +14,7 @@ viewHistory.addEventListener('click', function ViewHistory() {
     viewHistory.style = middle.style = footer.style = "display : none"
     undo.style = middle_history.style = "display : flex"
     console.log('ViewHistory')
+    share()
 })
 undo.addEventListener('click', function ViewMain() {
     viewHistory.style = middle.style = footer.style = "display : flex"
@@ -22,6 +23,19 @@ undo.addEventListener('click', function ViewMain() {
 })
         
 
+function share() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Your App Title',
+            text: 'Check out this awesome app!',
+            url: 'https://www.google.co.kr'
+        })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing:', error));
+    } else {
+        console.log('Web Share API not supported');
+    }
+}
 
 
 
