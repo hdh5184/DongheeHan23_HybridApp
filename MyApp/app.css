@@ -15,11 +15,28 @@ p{
     margin: 0;
 }
 
+#undo{
+    display: flex;
+    position: absolute;
+    border: 2px solid #385023;
+    border-radius: 30px;
+    justify-content: center;
+    line-height: 24px;
+    align-items: center;
+    width: 96px;
+    height: 40px;
+    text-align: center;
+    font-size: 24px;
+    color: #385023;
+    top: 24px;
+    left: 24px;
+}
+
 .header{
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 300px;
+    height: 280px;
     background-image: url("img/Header_Backgroung_Image.png");
     background-repeat: no-repeat;
     background-size : contain;
@@ -27,17 +44,45 @@ p{
 }
 
 .header_history{
+    display: flex;
+    justify-content: space-between;
     flex: 1;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.6);
+    padding-bottom: 24px;
 }
+
+.header_history_cup{
+    display: flex;
+    align-items: flex-end;
+}
+
+#header_history_cupA > span > p{
+    line-height: 16px;
+    font-size: 16px;
+}
+#header_history_cupB > span > p{
+    text-align: right;
+    color: #3F562A;
+    line-height: 24px;
+    font-size: 24px;
+}
+#header_history_cupA > span > #cupA{
+    line-height: 24px;
+    font-size: 24px;
+}
+#header_history_cupB > span > #cupB{
+    line-height: 32px;
+    font-size: 32px;
+}
+
 
 .header_button{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
     height: 64px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 #history{
@@ -54,6 +99,7 @@ p{
 
 #share{
     display: flex; justify-content: center; align-items: center;
+    float: right;
     width: 56px; height: 56px;
     margin-right: 16px;
     border-radius: 40px;
@@ -64,30 +110,85 @@ p{
     color: black;
 }
 
-.middle{
+.middle, .middle_history{
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: auto;
 }
 
-.current{
+.current, .history_cup{
     display: flex;
+    flex: 1;
     flex-direction: column;
     height: auto;
     margin: 32px 24px;
 }
 
-.current_date_month{
+.history_cup, .history_count{
+    margin: 0;
+    margin-bottom: 24px;
+    padding: 0px 24px;
+}
+
+#current_sub_p, #history_sub_p{
     font-size: 16px;
     line-height: 16px;
     color: #7C621E;
 }
 
-.current_news{
+.current_news, .history_cup_month{
     margin: 8px 0px;
     line-height: 28px;
     font-size: 24px;
     word-break: keep-all;
 }
+
+.history_cup_group{
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0px;
+}
+
+.history_cup_used{
+    display: flex;
+    margin: 4px 0px;
+}
+
+.history_cup_used_bar{
+    flex: 1;
+    height: 24px;
+    margin-right: 8px;
+}
+
+#used_cup{
+    width: 32px;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.history_count_group{
+    margin-top: 16px;
+    display: flex;
+}
+
+.history_count_group p{
+    text-align: center;
+    font-size: 24px;
+}
+
+#amount_discount, #amount_get{
+    font-size: 32px;
+    color: #466827;
+}
+
+.history_count_group_A, .history_count_group_B{
+    width: 50%;
+}
+
+#used_cupA_bar_1, #used_cupA_bar_2{background: linear-gradient(to right, #ffffff, #9A9A9A);}
+#used_cupB_bar_1, #used_cupB_bar_2{background: linear-gradient(to right, #ffffff, #466827);}
+
 
 .footer{
     position: fixed;
@@ -113,7 +214,7 @@ p{
 }
 
 #MyInfo, #News{
-    width: 64px;
+    width: 80px;
     height: auto;
 }
 

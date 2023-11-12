@@ -1,13 +1,23 @@
 <html lang="en">
 <head>
+    <title>yee</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="app.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/9082709747.js" crossorigin="anonymous"></script>
-<body>
+<body onload="init()">
+    <a href="#" id="undo">이전</a>
     <div class="header">
         <div class="header_history">
+            <div class="header_history_cup" id="header_history_cupA">
+                <img src="img/Cup1.png" alt="일회용 컵" width="50px" height="100px">
+                <span><p>일회용 컵</p><p id="cupA">5개</p></span>
+            </div>
+            <div class="header_history_cup" id="header_history_cupB">
+                <span><p>다회용 컵</p><p id="cupB">30개</p></span>
+                <img src="img/Cup2.png" alt="다회용 컵" width="60px" height="120px">
+            </div>
         </div>
         <div class="header_button">
             <a href="#" id="history">나의 실천 보기</a>
@@ -16,9 +26,9 @@
             </a>
         </div>
     </div>
-    <div class="middle">
+    <div class="middle" id="middle_Element">
         <div class="current">
-            <p class="current_date_month">1월 새로운 소식</p>
+            <p id="current_sub_p">1월 새로운 소식</p>
             <div class="current_news" id="current1">
                 <p>OO카페 다회용 컵 이용 혜택 400원으로 인상!</p>
             </div>
@@ -27,7 +37,7 @@
             </div>
         </div>
     </div>
-    <div class="footer">
+    <div class="footer" id="footer_Element">
         <div class="footer_button">
             <a href="#" class="footer_button_each" id="MyInfo">
                 <div>
@@ -43,11 +53,55 @@
             </a>
             <a href="#" class="footer_button_each" id="News">
                 <div>
-                    <img src="img/News.png" alt="소식" width="48px" height="48px">
+                    <img src="img/News.png" alt="소식" width="64px" height="48px">
                     <br>소식
                 </div>
             </a>
         </div>
     </div>
+
+
+    <div class="middle_history" id="middle_history">
+        <div class="history_cup">
+            <p id="history_sub_p">사용한 컵</p>
+            <div class="history_cup_group" id="history_cup_group_A">
+                <p class="history_cup_month">2023년 1월</p>
+                <div class="history_cup_used" id="used_cupA_1">
+                    <div class="history_cup_used_bar" id="used_cupA_bar_1"></div>
+                    <span id="used_cup">2</span>
+                </div>
+                <div class="history_cup_used" id="used_cupB_1">
+                    <div class="history_cup_used_bar" id="used_cupB_bar_1"></div>
+                    <span id="used_cup">12</span>
+                </div>
+            </div>
+            <div class="history_cup_group" id="history_cup_group_B">
+                <p class="history_cup_month">2022년 12월</p>
+                <div class="history_cup_used" id="used_cupA_2">
+                    <div class="history_cup_used_bar" id="used_cupA_bar_2"></div>
+                    <span id="used_cup">4</span>
+                </div>
+                <div class="history_cup_used" id="used_cupB_2">
+                    <div class="history_cup_used_bar" id="used_cupB_bar_2"></div>
+                    <span id="used_cup">22</span>
+                </div>
+            </div>
+        </div>
+        <div class="history_count">
+            <p id="history_sub_p">지금까지 받은 혜택</p>
+            <div class="history_count_group">
+                <div class="history_count_group_A">
+                    <p>금액 할인</p>
+                    <p class="history_count_amount" id="amount_discount">6,200원</p>
+                </div>
+                <div class="history_count_group_B">
+                    <p>기타 혜택</p>
+                    <p class="history_count_amount" id="amount_get">12건</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
