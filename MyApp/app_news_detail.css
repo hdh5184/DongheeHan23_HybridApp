@@ -38,6 +38,7 @@ p{
     flex-direction: column;
     width: 100%;
     margin-top: 80px;
+    margin-bottom: 120px;
 }
 
 .news_detail{
