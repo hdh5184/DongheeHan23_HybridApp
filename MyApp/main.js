@@ -1,8 +1,13 @@
 const undo = document.getElementById('undo')
 const viewHistory = document.getElementById('history')
-const middle = document.getElementById('middle_Element')
+const middle = document.getElementById('middle_main')
 const middle_history = document.getElementById('middle_history')
-const footer = document.getElementById('footer_Element')
+const footer = document.getElementById('footer_main')
+const ShareButton = document.getElementById('share')
+
+ShareButton.addEventListener('click', share)
+undo.addEventListener('click', ViewMain)
+viewHistory.addEventListener('click', ViewHistory)
 
 function init(){
     viewHistory.style = middle.style = footer.style = "display : flex"
@@ -10,37 +15,36 @@ function init(){
     //debug1()
 }
 
-viewHistory.addEventListener('click', function ViewHistory() {
-    viewHistory.style = middle.style = footer.style = "display : none"
-    undo.style = middle_history.style = "display : flex"
-    console.log('ViewHistory')
-    share()
-})
-undo.addEventListener('click', function ViewMain() {
-    viewHistory.style = middle.style = footer.style = "display : flex"
-    undo.style = middle_history.style = "display : none"
-    console.log('ViewMain')
-})
-        
-
 function share() {
     if (navigator.share) {
         navigator.share({
             title: 'Your App Title',
             text: 'Check out this awesome app!',
-            url: 'https://www.google.co.kr'
+            url: '/yee'
         })
         .then(() => console.log('Successful share'))
         .catch((error) => console.log('Error sharing:', error));
     } else {
         console.log('Web Share API not supported');
+        alert('Web Share API not supported');
     }
 }
 
+function ViewMain() {
+    viewHistory.style = middle.style = footer.style = "display : flex"
+    undo.style = middle_history.style = "display : none"
+    console.log('ViewMain')
+}
 
+function ViewHistory() {
+    viewHistory.style = middle.style = footer.style = "display : none"
+    undo.style = middle_history.style = "display : flex"
+    console.log('ViewHistory')
+}
 
 function debug1(){
     viewHistory.style = middle.style = footer.style = "display : none"
     undo.style = middle_history.style = "display : flex"
     console.log('Debug1')
 }
+
