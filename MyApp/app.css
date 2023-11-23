@@ -267,7 +267,7 @@ p{
     height: 36px;
 }
 
-#login_Form button, #SignUp_Form, #MyInfo_main button{
+#login_Form button, #SignUp_Form button, #MyInfo_main button{
     width: 80%;
     height: 48px;
     border-radius: 20px;
