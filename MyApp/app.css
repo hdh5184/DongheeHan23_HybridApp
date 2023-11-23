@@ -11,7 +11,7 @@ p{
     margin: 0;
 }
 
-#undo{
+#undo, #exit_login_main{
     display: flex;
     position: fixed;
     border: 4px solid #385023;

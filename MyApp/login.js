@@ -3,12 +3,14 @@ const auth = getAuth();
 
 const MyInfo = document.getElementById('MyInfo');
 
+const exitLogin = document.getElementById('exit_login_main')
 const goSignUp = document.getElementById('goSignUp')
 const goSignIn = document.getElementById('goSignIn')
 
 MyInfo.addEventListener('click', userInfo)
 goSignUp.addEventListener('click', SignUp)
 goSignIn.addEventListener('click', SignIn)
+exitLogin.addEventListener('click', loginExit)
 
 let isLogged
 
@@ -138,5 +140,9 @@ function SignUp(){
 function SignIn(){
     document.getElementById('login_Form').style = "display : flex"
     document.getElementById('SignUp_Form').style = "display : none"
+}
+function loginExit(){
+    document.getElementById('login_main').style = "display : none"
+    SignIn()
 }
 
