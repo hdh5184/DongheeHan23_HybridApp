@@ -1,3 +1,4 @@
+const mainPage = document.getElementById('mainPage')
 const undo = document.getElementById('undo')
 const viewHistory = document.getElementById('history')
 const middle = document.getElementById('middle_main')
@@ -30,7 +31,7 @@ function share() {
     }
 }
 
-function ViewMain() {
+async function ViewMain() {
     viewHistory.style = middle.style = footer.style = "display : flex"
     undo.style = middle_history.style = "display : none"
     console.log('ViewMain')

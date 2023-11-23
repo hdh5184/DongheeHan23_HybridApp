@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/9082709747.js" crossorigin="anonymous"></script>
 <body onload="init()">
-    <a href="" id="undo">이전</a>
+    <div id="undo">이전</div>
 
 
     <div id="mainPage" style="display: contents;">
@@ -44,8 +44,8 @@
         <div id="footer_main">
             <div id="footer_button">
                 <a href="#" class="footer_button_each" id="MyInfo">
-                    <div>
-                        <img src="img/MyInfo.png" alt="내 정보" width="48px" height="48px">
+                    <div id="MyInfoDiv">
+                        <img id="MyInfoImg" src="img/MyInfo.png" alt="내 정보" width="48px" height="48px">
                         <br>로그인
                     </div>
                 </a>
@@ -105,22 +105,44 @@
             </div>
         </div>
 
-        <div id="login_main">
-            <form>
-                <p>회원가입</p>
-                <div> 이메일 : <input type="email" id="signUpEmail"></div>
-                <div> 비밀번호 : <input type="password" id="signUpPassword"></div>
-                <button type="submit" id="signUpButton">회원가입 확인</button>
-                <button>로그인 하러 가기</button>
+        <div id="login_main" style="display: none;">
+            <form id="login_Form" style="display: none;">
+                <p style="font-size: 32px;">로그인</p>
+                <div id="submit_Div">
+                    <div> 이메일<br><input type="email" id="signInEmail"></div>
+                    <div> 비밀번호<br><input type="password" id="signInPassword"></div>
+                </div>
+                <div id="submit_Button">
+                    <button type="submit" id="signInButton">로그인</button>
+                    <p id="goSignUp">회원가입 하기</p>
+                </div>
             </form>
 
-            <form>
-                <p>로그인</p>
-                <div> 이메일 : <input type="email" id="signInEmail"></div>
-                <div> 비밀번호 : <input type="password" id="signInPassword"></div>
-                <button type="submit" id="signInButton">로그인 하기</button>
-                <button>회원가입</button>
+            <form id="SignUp_Form" style="display: none;">
+                <p style="font-size: 32px;">회원가입</p>
+                <div id="submit_Div">
+                    <div> 이메일<br><input type="email" id="signUpEmail"></div>
+                    <div> 비밀번호<br><input type="password" id="signUpPassword"></div>
+                    <div> 비밀번호 재확인<br><input type="password" id="signUpPasswordConfirm"></div>
+                </div>
+                <div id="submit_Button">
+                    <button type="submit" id="signUpButton">회원가입 완료</button>
+                    <p id="goSignIn">로그인 하기</p>
+                </div>
             </form>
+
+            <div id="MyInfo_main" style="display: none;">
+                <div id="MyInfo_div" style="display: content;">
+                    <p style="font-size: 32px;">내 정보</p>
+                    <div id="submit_Div">
+                        <p>email@email.email로 로그인</p>
+                        <p>최근 로그인 시간 : </p>
+                    </div>
+                    <div id="logout_Button">
+                        <button type="button" id="signOutButton">로그아웃</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -252,78 +274,7 @@
 
 
     <script type="text/javascript" src="main.js"></script>
-
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyCyWiKK9RJCOyDGIh-14YO99aYuNYa2yWM",
-          authDomain: "hybridapp2023-51592.firebaseapp.com",
-          projectId: "hybridapp2023-51592",
-          storageBucket: "hybridapp2023-51592.appspot.com",
-          messagingSenderId: "833940080458",
-          appId: "1:833940080458:web:9e2e96b553af1a04b2a3b3",
-          measurementId: "G-ZTGDE4QK0P"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
-        const auth = getAuth();
-
-        document.getElementById('signUpButton').addEventListener('click', async (event) => {
-            event.preventDefault();
-
-            const signUpEmail = document.getElementById('signUpEmail').value;
-            const signUpPassword = document.getElementById('signUpPassword').value;
-            console.log(email, password);
-
-            try {
-                const userCredential = await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword);
-                console.log("yeeeeee")
-
-                // 사용자가 로그인되었습니다.
-                const user = userCredential.user;
-                console.log("사용자 가입 완료:", user);
-            } catch (error) {
-                // 여기서 오류를 처리합니다.
-                console.log("aeeeeeerror")
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error("가입 중 오류 발생:", errorCode, errorMessage);
-            }
-        });
-
-        document.getElementById('signInButton').addEventListener('click', async (event) => {
-            event.preventDefault();
-
-            const signInEmail = document.getElementById('signInEmail').value;
-            const signInPassword = document.getElementById('signInPassword').value;
-
-            signInWithEmailAndPassword(auth, signInEmail, signInPassword)
-            .then((userCredential) => {
-                console.log("yeeeeee")
-                console.log(userCredential)
-
-                // Signed in 
-                const user = userCredential.user;
-                // ...
-            })
-            .catch((error) => {
-                console.log("aeeeeeerror")
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
-            });
-        
-      </script>
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="login.js"></script>
 </body>
 </html>
