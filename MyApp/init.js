@@ -29,22 +29,29 @@ if(!isLogged){
 let User, Email
 
 await onAuthStateChanged(auth, (user) => {
-  if (user) { User = user }
-  Email = User.email.toString()
+  if (user) {
+    User = user
+    Email = User.email.toString()
+    document.getElementById("userInfo").innerText = "이메일 : " + Email
+  }
 });
 
+if(isLogged){
+  var addUserContent = await getDocs(collection(db, "User", Email, "UseCupHistory"));
+  var updateDate = new Date().getFullYear().toString() + (new Date().getMonth() + 1).toString()
+  var updateDataContent = getDocs(collection(db, "User", Email, "UserCupCountMonth"))
+}
 
-const addUserContent = await getDocs(collection(db, "User", Email, "UseCupHistory"));
+await getData()
 
-await yee()
-
-function yee(){
+function getData(){
   if(isLogged){
     let useCups = 0
     let plasticCupUsed = 0, reusableCupUsed = 0
     let discountAmount = 0, benefitAmount = 0
     
     addUserContent.forEach(async (doc) => {
+      var date = new Date(doc.id)
       if(doc.data().benefit == "benefit") benefitAmount++
       else discountAmount += doc.data().discountValue
       
@@ -58,8 +65,12 @@ function yee(){
     document.getElementById("cupB").innerText = reusableCupUsed + "개"
     document.getElementById("amount_discount").innerText = discountAmount + "원"
     document.getElementById("amount_get").innerText = benefitAmount + "건"
+
+    //월별 컵 사용량 업데이트
   }
 }
+
+
 
 
 

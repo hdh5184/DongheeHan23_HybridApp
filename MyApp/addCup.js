@@ -6,7 +6,10 @@ import { collection, doc, getDocs, setDoc, addDoc, updateDoc } from "https://www
 let selectCup = null
 
 $("#AddCup").click((event) => {
-    $('#addCup_main').show()
+    onAuthStateChanged(auth, (user) => {
+        if (user) $('#addCup_main').show()
+        else alert("로그인 후 이용 가능합니다.")
+    });
 })
 
 $("#exit_addCup_main").click((event) => {
@@ -47,15 +50,34 @@ $("#addCup_button").click((event)=>{
                     discountValue : (benefitSeleted == "discount") ? discountValue : 0,
                     useCupType : selectCup
                 });
+
+                // var updateDate = new Date().getFullYear().toString() + (new Date().getMonth() + 1).toString()
+                // var updateUserContent = doc(db, "User", Email, "UserCupCountMonth", updateDate)
+
+                // if(selectCup == "plastic"){
+                //     updateDoc(await updateUserContent, {
+                //         plasticCount : updateUserContent.data().plasticCount += 1,
+                //     });
+                // }
+                // else{
+                //     updateDoc(updateUserContent, {
+                //         reusableCount : updateUserContent.data().reusableCount += 1,
+                //     });
+                // }
+
                 alert("기록 되었습니다.")
-                
+
                 selectCup = null
                 $('#addCup_main').hide()
                 document.getElementById("selectCup_plastic").style = "opacity : 0.5"
                 document.getElementById("selectCup_reusable").style = "opacity : 0.5"
+
+                setTimeout(restart, 500);
             } else {
                 alert('로그인 시 이용 가능합니다.')
             }
         });
     }
 })
+
+function restart() {location.reload()}

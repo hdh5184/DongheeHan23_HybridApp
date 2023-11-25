@@ -17,12 +17,12 @@
         <div id="header_main">
             <div id="header_history">
                 <div class="header_history_cup" id="header_history_cupA">
-                    <img id="CupImg1" src="" alt="일회용 컵" width="50px" height="100px">
+                    <img src="/img/Cup1.png" id="CupImg1" src="" alt="일회용 컵" width="50px" height="100px">
                     <span><p>일회용 컵</p><p id="cupA">0개</p></span>
                 </div>
                 <div class="header_history_cup" id="header_history_cupB">
                     <span><p>다회용 컵</p><p id="cupB">0개</p></span>
-                    <img id="CupImg2" src="" alt="다회용 컵" width="60px" height="120px">
+                    <img  src="/img/Cup2.png"id="CupImg2" src="" alt="다회용 컵" width="60px" height="120px">
                 </div>
             </div>
             <div id="header_button">
@@ -45,19 +45,19 @@
             <div id="footer_button">
                 <div class="footer_button_each" id="MyInfo">
                     <div id="MyInfoDiv">
-                        <img id="MyInfoImg" src="" alt="내 정보" width="48px" height="48px">
+                        <img src="/img/LogIn.png" id="MyInfoImg" src="" alt="내 정보" width="48px" height="48px">
                         <br>로그인
                     </div>
                 </div>
                 <div class="footer_button_each" id="AddCup">
                     <div>
-                        <img id="AddCupImg" src="" alt="컵 추가" width="96px" height="96px">
+                        <img src="/img/AddCup.png" id="AddCupImg" src="" alt="컵 추가" width="96px" height="96px">
                         <br>컵 추가
                     </div>
                 </div>
                 <div class="footer_button_each" id="NewsCurrent">
                     <div>
-                        <img id="NewsImg" src="" alt="소식" width="64px" height="48px">
+                        <img src="/img/News.png" id="NewsImg" src="" alt="소식" width="64px" height="48px">
                         <br>소식
                     </div>
                 </div>
@@ -112,8 +112,8 @@
             <form id="login_Form" style="display: none;">
                 <p style="font-size: 32px;">로그인</p>
                 <div id="submit_Div">
-                    <div> 이메일<br><input type="email" id="signInEmail"></div>
-                    <div> 비밀번호<br><input type="password" id="signInPassword"></div>
+                    <div> 이메일<br><input type="email" id="signInEmail" autocomplete='off'></div>
+                    <div> 비밀번호<br><input type="password" id="signInPassword" autocomplete='off'></div>
                 </div>
                 <div id="submit_Button">
                     <button type="submit" id="signInButton">로그인</button>
@@ -124,7 +124,7 @@
             <form id="SignUp_Form" style="display: none;">
                 <p style="font-size: 32px;">회원가입</p>
                 <div id="submit_Div">
-                    <div> 이메일<br><input type="email" id="signUpEmail"></div>
+                    <div> 이메일<br><input type="email" id="signUpEmail" autocomplete='off'></div>
                     <div> 비밀번호<br><input type="password" id="signUpPassword"></div>
                     <div> 비밀번호 재확인<br><input type="password" id="signUpPasswordConfirm"></div>
                 </div>
@@ -138,8 +138,7 @@
                 <div id="MyInfo_div" style="display: content;">
                     <p style="font-size: 32px;">내 정보</p>
                     <div id="submit_Div">
-                        <p>email@email.email로 로그인</p>
-                        <p>최근 로그인 시간 : </p>
+                        <p id="userInfo">이메일 : email@email.email</p>
                     </div>
                     <div id="logout_Button">
                         <button type="button" id="signOutButton">로그아웃</button>
