@@ -37,7 +37,7 @@ export { app }
 // await updateDoc(washingtonRef, {
 //   test : [124,14]
 // });
-
+//
 
 // const querySnapshot = await getDocs(collection(db, "UseCup"));
 // querySnapshot.forEach((doc) => {

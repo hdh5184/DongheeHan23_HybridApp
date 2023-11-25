@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .flex-container {
-            width: 50%; /* 브라우저 너비의 50% */
-            padding-bottom: 50%; /* 브라우저 너비의 50%를 세로 길이로 사용하여 정사각형을 만듭니다. */
-            background-color: #ddd;
-            position: relative;
-        }
-
-        /* 내용을 추가하기 위해 가상 요소를 사용합니다. */
-        .flex-container::before {
-            content: "";
-            display: block;
-            padding-bottom: inherit; /* 세로 길이를 상속하여 가로와 세로 길이를 동일하게 유지합니다. */
-        }
-
-        /* 내용을 추가하려면 이 부분에 스타일을 적용하세요. */
-        /* 예: .content { position: absolute; top: 0; left: 0; right: 0; bottom: 0; } */
-    </style>
-    <title>Relative Units Example</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Append Child Example</title>
 </head>
 <body>
-    <div class="flex-container">
-        <!-- 내용 추가 -->
-    </div>
+
+<div id="history_cup">
+  <p id="history_sub_p">사용한 컵</p>
+</div>
+
+<script>
+  // 부모 요소인 <div>를 선택합니다.
+  var parentDiv = document.getElementById("history_cup");
+
+  // 새로운 <span> 요소를 세 번 생성하고 추가합니다.
+  for (var i = 1; i <= 3; i++) {
+    var newSpan = document.createElement("span");
+    newSpan.textContent = "컵 " + i;
+    parentDiv.appendChild(newSpan);
+  }
+</script>
+
 </body>
 </html>

@@ -26,12 +26,11 @@ if(!isLogged){
       }).catch((error) => { console.error('이미지 다운로드 실패:', error);});
 }
 
-let User, Email
+let Email
 
 await onAuthStateChanged(auth, (user) => {
   if (user) {
-    User = user
-    Email = User.email.toString()
+    Email = user.email.toString()
     document.getElementById("userInfo").innerText = "이메일 : " + Email
   }
 });
@@ -39,9 +38,10 @@ await onAuthStateChanged(auth, (user) => {
 if(isLogged){
   var addUserContent = await getDocs(collection(db, "User", Email, "UseCupHistory"));
   var updateDate = new Date().getFullYear().toString() + (new Date().getMonth() + 1).toString()
-  var updateDataContent = getDocs(collection(db, "User", Email, "UserCupCountMonth"))
+  var updateDataContent = doc(db, "User", Email, "UserCupCountMonth", updateDate)
 }
 
+let currentMonth = {currentPlasticCount: 0, currentReusableCount: 0}
 await getData()
 
 function getData(){
@@ -52,11 +52,18 @@ function getData(){
     
     addUserContent.forEach(async (doc) => {
       var date = new Date(doc.id)
+      var current = date.getMonth() == new Date().getMonth()
       if(doc.data().benefit == "benefit") benefitAmount++
       else discountAmount += doc.data().discountValue
       
-      if(doc.data().useCupType == "plastic") plasticCupUsed++
-      else reusableCupUsed++
+      if(doc.data().useCupType == "plastic") {
+        if(current) currentMonth.currentPlasticCount++
+        plasticCupUsed++
+      }
+      else {
+        if(current) currentMonth.currentReusableCount++
+        reusableCupUsed++
+      }
   
       useCups++
     });
@@ -65,12 +72,53 @@ function getData(){
     document.getElementById("cupB").innerText = reusableCupUsed + "개"
     document.getElementById("amount_discount").innerText = discountAmount + "원"
     document.getElementById("amount_get").innerText = benefitAmount + "건"
-
-    //월별 컵 사용량 업데이트
   }
 }
 
+const getDataContent = await getDocs(collection(db, "User", Email, "UserCupCountMonth"));
 
+if(isLogged){
+  await updateDoc(updateDataContent, {
+    plasticCount : currentMonth.currentPlasticCount,
+    reusableCount : currentMonth.currentReusableCount
+  })
+
+  var append = []
+
+  getDataContent.forEach((doc) => {
+    var appendDiv = document.createElement("div");
+    appendDiv.className = "history_cup_group"
+
+    var getplasticCount = doc.data().plasticCount
+    var getReusableCount = doc.data().reusableCount
+
+    var getYear = doc.id.substr(0,4)
+    var getMonth = doc.id.substr(4,2)
+
+
+
+    appendDiv.innerHTML = `
+    <p id="history_cup_month">${getYear}년 ${getMonth}월</p>
+    <div class="history_cup_used" id="used_cupA">
+      <div class="history_cup_used_bar" id="used_cupA_bar_${doc.id}"></div>
+      <span id="used_cup">${getplasticCount}</span>
+    </div>
+    <div class="history_cup_used" id="used_cupB">
+      <div class="history_cup_used_bar" id="used_cupB_bar${doc.id}"></div>
+      <span id="used_cup">${getReusableCount}</span>
+    </div>
+    `;
+    append.push([appendDiv, doc.id])
+    console.log(append)
+  })
+
+  append.reverse().forEach(([div, id]) =>
+  {
+    document.getElementById("history_cup").appendChild(div)
+    console.log(div, id)
+  })
+  
+}
 
 
 

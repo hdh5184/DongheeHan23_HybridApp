@@ -3,10 +3,10 @@
     <title>Test</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="app.css">
-    <link rel="stylesheet" href="app_news.css">
-    <link rel="stylesheet" href="app_news_detail.css">
-    <link rel="stylesheet" href="app_share.css">
+    <link rel="stylesheet" href="public/css/app.css">
+    <link rel="stylesheet" href="public/css/app_news.css">
+    <link rel="stylesheet" href="public/css/app_news_detail.css">
+    <link rel="stylesheet" href="public/css/app_share.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@600&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/9082709747.js" crossorigin="anonymous"></script>
 <body onload="init()">
@@ -17,12 +17,12 @@
         <div id="header_main">
             <div id="header_history">
                 <div class="header_history_cup" id="header_history_cupA">
-                    <img src="/img/Cup1.png" id="CupImg1" src="" alt="일회용 컵" width="50px" height="100px">
+                    <img src="public/img/Cup1.png" id="CupImg1" src="" alt="일회용 컵" width="50px" height="100px">
                     <span><p>일회용 컵</p><p id="cupA">0개</p></span>
                 </div>
                 <div class="header_history_cup" id="header_history_cupB">
                     <span><p>다회용 컵</p><p id="cupB">0개</p></span>
-                    <img  src="/img/Cup2.png"id="CupImg2" src="" alt="다회용 컵" width="60px" height="120px">
+                    <img  src="public/img/Cup2.png"id="CupImg2" src="" alt="다회용 컵" width="60px" height="120px">
                 </div>
             </div>
             <div id="header_button">
@@ -45,19 +45,19 @@
             <div id="footer_button">
                 <div class="footer_button_each" id="MyInfo">
                     <div id="MyInfoDiv">
-                        <img src="/img/LogIn.png" id="MyInfoImg" src="" alt="내 정보" width="48px" height="48px">
+                        <img src="public/img/LogIn.png" id="MyInfoImg" src="" alt="내 정보" width="48px" height="48px">
                         <br>로그인
                     </div>
                 </div>
                 <div class="footer_button_each" id="AddCup">
                     <div>
-                        <img src="/img/AddCup.png" id="AddCupImg" src="" alt="컵 추가" width="96px" height="96px">
+                        <img src="public/img/AddCup.png" id="AddCupImg" src="" alt="컵 추가" width="96px" height="96px">
                         <br>컵 추가
                     </div>
                 </div>
                 <div class="footer_button_each" id="NewsCurrent">
                     <div>
-                        <img src="/img/News.png" id="NewsImg" src="" alt="소식" width="64px" height="48px">
+                        <img src="public/img/News.png" id="NewsImg" src="" alt="소식" width="64px" height="48px">
                         <br>소식
                     </div>
                 </div>
@@ -67,28 +67,6 @@
         <div id="middle_history">
             <div id="history_cup">
                 <p id="history_sub_p">사용한 컵</p>
-                <div class="history_cup_group" id="history_cup_group_A">
-                    <p id="history_cup_month">2023년 1월</p>
-                    <div class="history_cup_used" id="used_cupA_1">
-                        <div class="history_cup_used_bar" id="used_cupA_bar_1"></div>
-                        <span id="used_cup">2</span>
-                    </div>
-                    <div class="history_cup_used" id="used_cupB_1">
-                        <div class="history_cup_used_bar" id="used_cupB_bar_1"></div>
-                        <span id="used_cup">12</span>
-                    </div>
-                </div>
-                <div class="history_cup_group" id="history_cup_group_B">
-                    <p id="history_cup_month">2022년 12월</p>
-                    <div class="history_cup_used" id="used_cupA_2">
-                        <div class="history_cup_used_bar" id="used_cupA_bar_2"></div>
-                        <span id="used_cup">4</span>
-                    </div>
-                    <div class="history_cup_used" id="used_cupB_2">
-                        <div class="history_cup_used_bar" id="used_cupB_bar_2"></div>
-                        <span id="used_cup">22</span>
-                    </div>
-                </div>
             </div>
             <div id="history_count">
                 <p id="history_sub_p">지금까지 받은 혜택</p>
@@ -310,10 +288,12 @@
     src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
     crossorigin="anonymous"></script>
-    <script type="text/javascript" src="main.js"></script>
-    <script type="module" src="firebase.js"></script>
-    <script type="module" src="login.js"></script>
-    <script type="module" src="init.js"></script>
-    <script type="module" src="addCup.js"></script>
+    <script type="text/javascript" src="public/js/main.js"></script>
+    <script type="module" src="public/js/firebase.js"></script>
+    <script type="module" src="public/js/database.js"></script>
+    <script type="module" src="public/js/login.js"></script>
+    <script type="module" src="public/js/init.js"></script>
+    <script type="module" src="public/js/addCup.js"></script>
+    <script type="module" src="public/js/share.js"></script>
 </body>
 </html>
