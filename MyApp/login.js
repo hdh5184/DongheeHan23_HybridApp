@@ -12,28 +12,28 @@ goSignUp.addEventListener('click', SignUp)
 goSignIn.addEventListener('click', SignIn)
 exitLogin.addEventListener('click', loginExit)
 
-let isLogged
+let isLogged //로그인 유무
+export {isLogged}
 
 //회원가입
 document.getElementById('signUpButton').addEventListener('click', async (event) => {
     event.preventDefault();
-    const signUpEmail = document.getElementById('signUpEmail').value;
-    const signUpPassword = document.getElementById('signUpPassword').value;
-    const signUpPasswordConfirm = document.getElementById('signUpPasswordConfirm').value;
-    //console.log(signUpEmail, signUpPassword);
+    const signUpEmail = document.getElementById('signUpEmail').value; //이메일
+    const signUpPassword = document.getElementById('signUpPassword').value; //비밀번호
+    const signUpPasswordConfirm = document.getElementById('signUpPasswordConfirm').value; //비밀번호 재확인
 
     if(signUpPassword != signUpPasswordConfirm){
+        //비밀번호 재확인 불일치
         alert("비밀번호를 다시 확인하세요.")
     }
     else{
         try {
+            //회원가입 진행
             const userCredential = await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword);
-    
-            // 사용자가 로그인되었습니다.
             const user = userCredential.user;
             console.log("사용자 가입 완료:", user);
         } catch (error) {
-            // 여기서 오류를 처리합니다.
+            //회원가입 실패
             const errorCode = error.code;
             const errorMessage = error.message;
             switch(errorCode){
@@ -63,17 +63,13 @@ document.getElementById('signInButton').addEventListener('click', async (event) 
 
     signInWithEmailAndPassword(auth, signInEmail, signInPassword)
     .then((userCredential) => {
-        alert("yeeeeee")
+        //로그인 완료
         console.log(userCredential)
-
-        // Signed in 
         const user = userCredential.user;
-        // ...
-
         location.reload();
     })
     .catch((error) => {
-        console.log("aeeeeeerror")
+        //로그인 실패
         const errorCode = error.code;
         const errorMessage = error.message;
         switch(errorCode){
@@ -90,38 +86,35 @@ document.getElementById('signInButton').addEventListener('click', async (event) 
     });
 });
 
+//로그아웃
 document.getElementById('signOutButton').addEventListener('click', async (event) => {
     event.preventDefault()
     auth.signOut()
     location.reload();
 })
 
+//로그인 상태 확인
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
         console.log("로그인 중")
         console.log(user);
-        // ...
         isLogged = true;
         document.getElementById('MyInfoDiv').innerHTML = `
-        <img id="MyInfoImg" src="img/MyInfo.png" alt="내 정보" width="48px" height="48px">
+        <img id="MyInfoImg" alt="내 정보" width="48px" height="48px">
         <br>내 정보
         `
     } else {
-        // User is signed out
-        // ...
         console.log("나감")
         isLogged = false
         document.getElementById('MyInfoDiv').innerHTML = `
-        <img id="MyInfoImg" src="img/LogIn.png" alt="내 정보" width="48px" height="48px">
+        <img id="MyInfoImg" alt="로그인" width="48px" height="48px">
         <br>로그인
         `
     }
 });
 
-
+//로그인 또는 내 정보
 function userInfo(){
     document.getElementById('login_main').style = "display : content"
     if(isLogged){
@@ -133,16 +126,19 @@ function userInfo(){
     
 }
 
+//회원가입 창 출현
 function SignUp(){
     document.getElementById('SignUp_Form').style = "display : flex"
     document.getElementById('login_Form').style = "display : none"
 }
+//로그인 창 출현
 function SignIn(){
     document.getElementById('login_Form').style = "display : flex"
     document.getElementById('SignUp_Form').style = "display : none"
 }
+//로그인 및 회원가입 창에서 나가기
 function loginExit(){
     document.getElementById('login_main').style = "display : none"
-    SignIn()
+    SignIn() //기본 로그인 창이 먼저 출현
 }
 
