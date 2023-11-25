@@ -1,5 +1,13 @@
+import { app } from "./firebase.js"
+
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
+import { collection, doc, getDocs, setDoc, addDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js"; 
+
+import { db, storage } from "./database.js"
+
 const auth = getAuth();
+
+export { auth }
 
 const MyInfo = document.getElementById('MyInfo');
 
@@ -32,6 +40,12 @@ document.getElementById('signUpButton').addEventListener('click', async (event) 
             const userCredential = await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword);
             const user = userCredential.user;
             console.log("사용자 가입 완료:", user);
+            var addUser = doc(db, "User", signUpEmail);
+            await setDoc(addUser, { });
+            var addUserContent = doc(db, "User", signUpEmail, "UseCupHistory", "first");
+            await setDoc(addUserContent, { });
+            alert("회원가입을 완료하였습니다.");
+            location.reload();
         } catch (error) {
             //회원가입 실패
             const errorCode = error.code;

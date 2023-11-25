@@ -18,10 +18,10 @@
             <div id="header_history">
                 <div class="header_history_cup" id="header_history_cupA">
                     <img id="CupImg1" src="" alt="일회용 컵" width="50px" height="100px">
-                    <span><p>일회용 컵</p><p id="cupA">5개</p></span>
+                    <span><p>일회용 컵</p><p id="cupA">0개</p></span>
                 </div>
                 <div class="header_history_cup" id="header_history_cupB">
-                    <span><p>다회용 컵</p><p id="cupB">30개</p></span>
+                    <span><p>다회용 컵</p><p id="cupB">0개</p></span>
                     <img id="CupImg2" src="" alt="다회용 컵" width="60px" height="120px">
                 </div>
             </div>
@@ -95,11 +95,11 @@
                 <div class="history_count_group">
                     <div id="history_count_group_A">
                         <p>금액 할인</p>
-                        <p id="amount_discount">6,200원</p>
+                        <p id="amount_discount">?원</p>
                     </div>
                     <div id="history_count_group_B">
                         <p>기타 혜택</p>
-                        <p id="amount_get">12건</p>
+                        <p id="amount_get">?건</p>
                     </div>
                 </div>
             </div>
@@ -147,7 +147,38 @@
                 </div>
             </div>
         </div>
+
+        <div id="addCup_main" style="display: none;">
+            <div id="exit_addCup_main">이전</div>
+    
+            <div id="addCup_div" style="display: flex;">
+                <p style="font-size: 28px;">오늘의 컵 기록</p>
+                <div id="benefit_buttonDiv">
+                    <label id="discount">
+                        금액 할인<input type="radio" name="selectCupGroup" id="discount_button" value="1" checked>
+                    </label>
+                    <label id="benefit">
+                        기타 혜택<input type="radio" name="selectCupGroup" id="benefit_button" value="0">
+                    </label>
+                </div>
+                <label id="discount_input">
+                    할인 금액&nbsp;<input type="number" id="discount_value" value="0">
+                </label>
+                <div id="selectCup_div">
+                    <div class="selectCup_button" id="selectCup_plastic">
+                        <img id="selectCupImg1" src="" alt="소식" width="52px" height="96px">
+                        일회용
+                    </div>
+                    <div class="selectCup_button" id="selectCup_reusable">
+                        <img id="selectCupImg2" src="" alt="소식" width="52px" height="96px">
+                        다회용
+                    </div>
+                </div>
+                <div id="addCup_button">기록하기</div>
+            </div>
+        </div>
     </div>
+
 
     <div id="newsPage" style="display: none;">
         <a href="" id="undo">이전</a>
@@ -250,7 +281,7 @@
         <a href="#" id="undo">이전</a>
         <div id="header_share">
             <div id="select_photo">
-                <img src="img/Camera.png" alt="카메라" width="40%" height="40%">
+                <img id="shareImg" alt="카메라" width="40%" height="40%">
                 <p>공유할 사진을<br>선택하세요!</p>
             </div>
         </div>
@@ -284,5 +315,6 @@
     <script type="module" src="firebase.js"></script>
     <script type="module" src="login.js"></script>
     <script type="module" src="init.js"></script>
+    <script type="module" src="addCup.js"></script>
 </body>
 </html>
