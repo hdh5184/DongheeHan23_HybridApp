@@ -156,10 +156,13 @@ p{
     margin: 4px 0px;
 }
 
-.history_cup_used_bar{
+.history_cup_used_barA, .history_cup_used_barB{
     height: 24px;
     margin-right: 8px;
 }
+
+.history_cup_used_barA{background: linear-gradient(to right, #ffffff, #9A9A9A);}
+.history_cup_used_barB{background: linear-gradient(to right, #ffffff, #466827);}
 
 #used_cup{
     width: 32px;
@@ -184,8 +187,6 @@ p{
     color: #466827;
 }
 
-#used_cupA_bar{background: linear-gradient(to right, #ffffff, #9A9A9A);}
-#used_cupB_bar{background: linear-gradient(to right, #ffffff, #466827);}
 
 
 #footer_main{

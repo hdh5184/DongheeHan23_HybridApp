@@ -75,15 +75,15 @@ function getData(){
   }
 }
 
-const getDataContent = await getDocs(collection(db, "User", Email, "UserCupCountMonth"));
 
 if(isLogged){
   await updateDoc(updateDataContent, {
     plasticCount : currentMonth.currentPlasticCount,
     reusableCount : currentMonth.currentReusableCount
   })
-
+  
   var append = []
+  const getDataContent = await getDocs(collection(db, "User", Email, "UserCupCountMonth"));
 
   getDataContent.forEach((doc) => {
     var appendDiv = document.createElement("div");
@@ -95,16 +95,27 @@ if(isLogged){
     var getYear = doc.id.substr(0,4)
     var getMonth = doc.id.substr(4,2)
 
-
+    if(getplasticCount > getReusableCount){
+      var plasticBarPercent = 90
+      var ReusableBarPercent = (getReusableCount / getplasticCount) * 90
+    }
+    else{
+      var ReusableBarPercent = 90
+      var plasticBarPercent = (getplasticCount / getReusableCount) * 90
+    }
+    console.log(plasticBarPercent, ReusableBarPercent)
+    
 
     appendDiv.innerHTML = `
     <p id="history_cup_month">${getYear}년 ${getMonth}월</p>
     <div class="history_cup_used" id="used_cupA">
-      <div class="history_cup_used_bar" id="used_cupA_bar_${doc.id}"></div>
+      <div class="history_cup_used_barA" id="used_cupA_bar_${doc.id}"
+      style = "width : ${plasticBarPercent}%"></div>
       <span id="used_cup">${getplasticCount}</span>
     </div>
     <div class="history_cup_used" id="used_cupB">
-      <div class="history_cup_used_bar" id="used_cupB_bar${doc.id}"></div>
+      <div class="history_cup_used_barB" id="used_cupB_bar_${doc.id}"
+      style = "width : ${ReusableBarPercent}%"></div>
       <span id="used_cup">${getReusableCount}</span>
     </div>
     `;
