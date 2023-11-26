@@ -121,14 +121,14 @@ onAuthStateChanged(auth, (user) => {
         console.log("로그인 중")
         isLogged = true;
         document.getElementById('MyInfoDiv').innerHTML = `
-        <img src="public/img/MyInfo.png" id="MyInfoImg" alt="내 정보" width="48px" height="48px">
+        <img src="img/MyInfo.png" id="MyInfoImg" alt="내 정보" width="48px" height="48px">
         <br>내 정보
         `
     } else {
         console.log("나감")
         isLogged = false
         document.getElementById('MyInfoDiv').innerHTML = `
-        <img src="public/img/Login.png" id="MyInfoImg" alt="로그인" width="48px" height="48px">
+        <img src="img/Login.png" id="MyInfoImg" alt="로그인" width="48px" height="48px">
         <br>로그인
         `
     }

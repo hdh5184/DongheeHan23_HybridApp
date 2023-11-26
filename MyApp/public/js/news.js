@@ -109,7 +109,6 @@ $(".event_content").click((event)=>{
 $("#news_detail_button").click((event) => {
     const compare = document.querySelector('.news_detail').id
     const compareId = compare.slice(6)
-    console.log(compareId)
 
     eventData.forEach((data) => {
         if(compareId == data.id){

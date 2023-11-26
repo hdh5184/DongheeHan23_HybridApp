@@ -10,6 +10,7 @@
 <script type="module" src="js/login.js"></script>
 <script type="module" src="js/init.js"></script>
 <script type="module" src="js/addCup.js"></script>
+<script type="module" src="js/news.js"></script>
 <script type="module" src="js/share.js"></script>
 
 img src="img/LogIn.png"
@@ -28,6 +29,7 @@ img src="img/LogIn.png"
 <script type="module" src="public/js/login.js"></script>
 <script type="module" src="public/js/init.js"></script>
 <script type="module" src="public/js/addCup.js"></script>
+<script type="module" src="public/js/news.js"></script>
 <script type="module" src="public/js/share.js"></script>
 
 img src="public/img/LogIn.png"
