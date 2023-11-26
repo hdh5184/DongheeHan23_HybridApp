@@ -124,10 +124,7 @@ if(isLogged){
   })
 
   append.reverse().forEach(([div, id]) =>
-  {
-    document.getElementById("history_cup").appendChild(div)
-    console.log(div, id)
-  })
+  {document.getElementById("history_cup").appendChild(div)})
   
 }
 
