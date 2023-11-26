@@ -1,5 +1,5 @@
 import { eventData } from "./init.js"
-console.log(eventData)
+
 $("#NewsCurrent").click((event) => { $("#mainPage").hide(); $("#newsPage").show() })
 $("#exit_news").click((event) => { $("#newsPage").hide(); $("#mainPage").show() })
 $("#exit_news_detail").click((event) => { $("#newsPageDetail").hide(); $("#newsPage").show() })
@@ -16,6 +16,33 @@ $("#category_event").click((event) => {
     $("#category_event").css({ "background-color": "#385023", "color": "white" })
 })
 
+$(".news_content").click((event)=>{
+    const elementsWithClass = document.querySelectorAll('.news_content');
+    const elementsArray = Array.from(elementsWithClass);
+    let selectId
+
+    elementsArray.forEach(element => {
+        const clickedElement = event.target;
+        const parentElement = element; // 특정 부모 요소
+
+        // 클릭한 요소가 특정 부모 요소 안에 있는지 확인
+        let isInsideParent = false;
+        let currentElement = clickedElement;
+
+        while (currentElement) {
+            if (currentElement === parentElement) {
+            isInsideParent = true;
+            break;
+            }
+            currentElement = currentElement.parentNode;
+        }
+
+        if (isInsideParent) selectId = element.id; return
+    });
+    console.log(selectId)
+})
+
+//이벤트 목록 내용 확인
 $(".event_content").click((event)=>{
     $("#newsPage").hide()
     $("#newsPageDetail").show()
@@ -42,6 +69,8 @@ $(".event_content").click((event)=>{
 
         if (isInsideParent) selectId = element.id; return
     });
+
+    console.log(selectId)
 
     eventData.forEach((data) => {
         if(selectId == `event_${data.id}`){

@@ -160,6 +160,7 @@ const getNewsBenefit = await getDocs(collection(db, "NewsBenefit"));
 getNewsBenefit.forEach((doc) => {
   var appendDiv = document.createElement("div");
   appendDiv.className = "news_content"
+  appendDiv.id = `news_${doc.id}`
   appendDiv.style = doc.data().background
 
   var BenefitDate = doc.data().date
