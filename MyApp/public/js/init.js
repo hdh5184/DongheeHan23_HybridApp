@@ -43,6 +43,7 @@ if(isLogged){
 
 let currentMonth = {currentPlasticCount: 0, currentReusableCount: 0}
 
+//나의 실천 보기 정보 가져오기 (집계)
 let useCups = 0
 let plasticCupUsed = 0, reusableCupUsed = 0
 let discountAmount = 0, benefitAmount = 0
@@ -76,16 +77,18 @@ function getData(){
   }
 }
 
+//공유용 키워드 전달
 const MyKeyword =
-  {
-    reusable : reusableCupUsed,
-    discount : discountAmount,
-    benefit : benefitAmount
-  }
+{
+  reusable : reusableCupUsed,
+  discount : discountAmount,
+  benefit : benefitAmount
+}
+export {MyKeyword}
 
-  export {MyKeyword}
 
 if(isLogged){
+  //월간 컵 기록 업데이트
   try {
     await updateDoc(updateDataContent, {
       plasticCount : currentMonth.currentPlasticCount,
@@ -107,6 +110,7 @@ if(isLogged){
     })
   }
   
+  //나의 실천 보기 정보 가져오기 (그래프)
   var append = []
   const getDataContent = await getDocs(collection(db, "User", Email, "UserCupCountMonth"));
 
@@ -149,66 +153,74 @@ if(isLogged){
   {document.getElementById("history_cup").appendChild(div)})
 }
 
+//뉴스 정보 가져오기
 var append = []
 
-  const getNewsBenefit = await getDocs(collection(db, "NewsBenefit"));
-  getNewsBenefit.forEach((doc) => {
-    var appendDiv = document.createElement("div");
-    appendDiv.className = "news_content"
-    appendDiv.style = doc.data().background
+const getNewsBenefit = await getDocs(collection(db, "NewsBenefit"));
+getNewsBenefit.forEach((doc) => {
+  var appendDiv = document.createElement("div");
+  appendDiv.className = "news_content"
+  appendDiv.style = doc.data().background
 
-    var BenefitDate = doc.data().date
-    var BenefitContent = doc.data().content
+  var BenefitDate = doc.data().date
+  var BenefitContent = doc.data().content
 
-    appendDiv.innerHTML = `
-    <div class="news_title">
-      <p id="news_date">${BenefitDate}</p>
-      <p id="news_title">${BenefitContent}</p>
-      </div>
-    <div class="news_img" id="${doc.id}"></div>
-    `
-    append.push(appendDiv)
-  });
-
-  append.reverse().forEach((div) =>
-  {document.getElementById("news_div").appendChild(div)})
-
-  getNewsBenefit.forEach((doc) => {
-    getDownloadURL(ref(storage, doc.data().src)).then((url) => {
-      document.getElementById(doc.id).style = `background-image: url(${url})`
-    }).catch((error) => { console.error('이미지 다운로드 실패:', error);});
-  });
-
-
-
-
-  var append = []
-
-  const getNewsEvent = await getDocs(collection(db, "NewsEvent"));
-  getNewsEvent.forEach((doc) => {
-    var appendDiv = document.createElement("div");
-    appendDiv.className = "event_content"
-    appendDiv.id = `event_${doc.id}`
-    appendDiv.style = doc.data().background
-
-    var EventDate = doc.data().date
-    var EventContent = doc.data().content
-
-    appendDiv.innerHTML = `
-    <div class="event_title">
-        <p id="event_date">${EventDate}</p>
-        <p id="event_title">${EventContent}</p>
+  appendDiv.innerHTML = `
+  <div class="news_title">
+    <p id="news_date">${BenefitDate}</p>
+    <p id="news_title">${BenefitContent}</p>
     </div>
-    `
-    append.push(appendDiv)
-  });
+  <div class="news_img" id="${doc.id}"></div>
+  `
+  append.push(appendDiv)
+});
 
-  append.reverse().forEach((div) =>
-  {document.getElementById("event_div").appendChild(div)})
+append.reverse().forEach((div) =>
+{document.getElementById("news_div").appendChild(div)})
 
-  getNewsEvent.forEach((doc) => {
-    getDownloadURL(ref(storage, doc.data().src)).then((url) => {
-      document.getElementById(`event_${doc.id}`).style =
-      `${doc.data().background} background-image: url(${url})`
-    }).catch((error) => { console.error('이미지 다운로드 실패:', error);});
-  });
+getNewsBenefit.forEach((doc) => {
+  getDownloadURL(ref(storage, doc.data().src)).then((url) => {
+    document.getElementById(doc.id).style = `background-image: url(${url})`
+  }).catch((error) => { console.error('이미지 다운로드 실패:', error);});
+});
+
+
+
+//이벤트 정보 가져오기
+var append = []
+var event = []
+
+const getNewsEvent = await getDocs(collection(db, "NewsEvent"));
+getNewsEvent.forEach((doc) => {
+  var appendDiv = document.createElement("div");
+  appendDiv.className = "event_content"
+  appendDiv.id = `event_${doc.id}`
+  appendDiv.style = doc.data().background
+
+  var EventDate = doc.data().date
+  var EventContent = doc.data().content
+
+  appendDiv.innerHTML = `
+  <div class="event_title">
+      <p id="event_date">${EventDate}</p>
+      <p id="event_title">${EventContent}</p>
+  </div>
+  `
+  append.push(appendDiv)
+  event.push(doc.data())
+  
+});
+
+append.reverse().forEach((div) =>
+{document.getElementById("event_div").appendChild(div)})
+
+var count = 0
+getNewsEvent.forEach((doc) => {
+  getDownloadURL(ref(storage, doc.data().src)).then((url) => {
+    document.getElementById(`event_${doc.id}`).style =
+    `${doc.data().background} background-image: url(${url})`
+  }).catch((error) => { console.error('이미지 다운로드 실패:', error);});
+});
+
+const eventData = event
+export { eventData }

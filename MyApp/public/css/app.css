@@ -11,7 +11,7 @@ p{
     margin: 0;
 }
 
-#undo, #exit_login_main, #exit_addCup_main, #exit_share, #exit_news{
+#undo, #exit_login_main, #exit_addCup_main, #exit_share, #exit_news, #exit_news_detail{
     display: flex;
     position: fixed;
     border: 4px solid #385023;

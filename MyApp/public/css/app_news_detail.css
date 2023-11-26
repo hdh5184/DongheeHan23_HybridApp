@@ -6,13 +6,12 @@
     margin-bottom: 120px;
 }
 
-#news_detail{
+.news_detail{
     display: flex;
     margin: 0px 24px;
     height: 500px;
     border-radius: 20px;
     background-color: #DDECD4;
-    background-image: url("img/Cafe_Image1.png");
     background-size: 260px;
     background-repeat: no-repeat;
     background-position: right top;

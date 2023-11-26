@@ -12,8 +12,7 @@
 <body onload="init()">
     <div id="undo">이전</div>
 
-
-    <div id="mainPage" style="display: contents;">
+    <div id="mainPage" style="display: none;">
         <div id="header_main">
             <div id="header_history">
                 <div class="header_history_cup" id="header_history_cupA">
@@ -84,7 +83,6 @@
                 </div>
             </div>
         </div>
-        <div id="imageContainer" width="100px"></div>
 
         <div id="login_main" style="display: none;">
             <div id="exit_login_main">이전</div>
@@ -159,8 +157,9 @@
     </div>
 
 
-    <div id="newsPage" style="display: none;">
+    <div id="newsPage" style="display: contents;">
         <div id="exit_news">이전</div>
+
         <div id="header_news">
             <div class="category" id="category_benefit">혜택 찾아보기</div>
             <div class="category" id="category_event">이벤트 찾아보기</div>
@@ -170,40 +169,17 @@
                 <div id="news_div">
                 </div>
             </div>
-    
             <div id="event">
-                <div id="event_div" id="event_23">
-                    
-                </div>
-                <div id="event_div" id="event_22">
-                    
+                <div id="event_div">
                 </div>
             </div>
         </div>
     </div>
 
     <div id="newsPageDetail" style="display: none;">
-        <a href="#" id="undo">이전</a>
+        <div id="exit_news_detail">이전</div>
+
         <div id="middle_news_detail">
-            <div id="news_detail">
-                <div id="news_detail_sub">
-                    <div id="news_detail_div">
-                        <p id="news_detail_date">2023년 01월 01일</p>
-                        <p id="news_detail_title">OO카페 다회용 컵 포장<br>SNS 공유 이벤트</p>
-                        <hr>
-                        <p id="news_detail_content1">블로그 또는 SNS에서 게시글 추첨</p>
-                        <p id="news_detail_content2">경품 및 할인 쿠폰 및 교환권 획득 가능</p>
-                        <p id="news_detail_event_description">
-                            이벤트 기간 : 1월 1일 ~ 1월 20일<br>추첨 일자 : 1월 21일</p>
-                        <p id="news_detail_description">
-                            이벤트 내용 가나다라마바사<br>
-                            이벤트 내용 가나다라마바사<br>
-                            이벤트 내용 가나다라마바사<br>
-                            이벤트 내용 가나다라마바사
-                        </p>
-                    </div>
-                </div>
-            </div>
         </div>
         <div id="footer_news_detail">
             <a href="#" id="news_detail_button">자세한 내용 확인하기</a>
@@ -212,6 +188,7 @@
 
     <div id="sharePage" style="display: none;">
         <div id="exit_share">이전</div>
+
         <div id="header_share">
             <div id="select_photo">
                 <img id="shareImg" alt="카메라" width="40%" height="40%">
