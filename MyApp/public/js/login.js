@@ -39,11 +39,18 @@ document.getElementById('signUpButton').addEventListener('click', async (event) 
             //회원가입 진행
             const userCredential = await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword);
             const user = userCredential.user;
-            console.log("사용자 가입 완료:", user);
+
+            const signUpDate =
+            new Date().getFullYear().toString() + (new Date().getMonth() + 1).toString()
+
             var addUser = doc(db, "User", signUpEmail);
             await setDoc(addUser, { });
-            var addUserContent = doc(db, "User", signUpEmail, "UseCupHistory", "first");
-            await setDoc(addUserContent, { });
+            var addUserContent = doc(db, "User", signUpEmail, "UserCupCountMonth", signUpDate);
+            await setDoc(addUserContent, {
+                plasticCount : 0,
+                reusableCount : 0
+            });
+
             alert("회원가입을 완료하였습니다.");
             location.reload();
         } catch (error) {
@@ -112,7 +119,6 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         //const uid = user.uid;
         console.log("로그인 중")
-        console.log(user)
         isLogged = true;
         document.getElementById('MyInfoDiv').innerHTML = `
         <img src="public/img/MyInfo.png" id="MyInfoImg" alt="내 정보" width="48px" height="48px">

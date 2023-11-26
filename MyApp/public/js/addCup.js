@@ -51,20 +51,6 @@ $("#addCup_button").click((event)=>{
                     useCupType : selectCup
                 });
 
-                // var updateDate = new Date().getFullYear().toString() + (new Date().getMonth() + 1).toString()
-                // var updateUserContent = doc(db, "User", Email, "UserCupCountMonth", updateDate)
-
-                // if(selectCup == "plastic"){
-                //     updateDoc(await updateUserContent, {
-                //         plasticCount : updateUserContent.data().plasticCount += 1,
-                //     });
-                // }
-                // else{
-                //     updateDoc(updateUserContent, {
-                //         reusableCount : updateUserContent.data().reusableCount += 1,
-                //     });
-                // }
-
                 alert("기록 되었습니다.")
 
                 selectCup = null
@@ -73,8 +59,6 @@ $("#addCup_button").click((event)=>{
                 document.getElementById("selectCup_reusable").style = "opacity : 0.5"
 
                 setTimeout(restart, 500);
-            } else {
-                alert('로그인 시 이용 가능합니다.')
             }
         });
     }

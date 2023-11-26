@@ -86,10 +86,26 @@ const MyKeyword =
   export {MyKeyword}
 
 if(isLogged){
-  await updateDoc(updateDataContent, {
-    plasticCount : currentMonth.currentPlasticCount,
-    reusableCount : currentMonth.currentReusableCount
-  })
+  try {
+    await updateDoc(updateDataContent, {
+      plasticCount : currentMonth.currentPlasticCount,
+      reusableCount : currentMonth.currentReusableCount
+    })
+  } catch (error) {
+    console.log("새로운 월간 기록")
+    const signUpDate =
+    new Date().getFullYear().toString() + (new Date().getMonth() + 1).toString()
+
+    var addUserContent = doc(db, "User", signUpEmail, "UserCupCountMonth", signUpDate);
+    await setDoc(addUserContent, {
+        plasticCount : 0,
+        reusableCount : 0
+    });
+    await updateDoc(updateDataContent, {
+      plasticCount : currentMonth.currentPlasticCount,
+      reusableCount : currentMonth.currentReusableCount
+    })
+  }
   
   var append = []
   const getDataContent = await getDocs(collection(db, "User", Email, "UserCupCountMonth"));
@@ -131,8 +147,9 @@ if(isLogged){
 
   append.reverse().forEach((div) =>
   {document.getElementById("history_cup").appendChild(div)})
+}
 
-  var append = []
+var append = []
 
   const getNewsBenefit = await getDocs(collection(db, "NewsBenefit"));
   getNewsBenefit.forEach((doc) => {
@@ -162,4 +179,36 @@ if(isLogged){
     }).catch((error) => { console.error('이미지 다운로드 실패:', error);});
   });
 
-}
+
+
+
+  var append = []
+
+  const getNewsEvent = await getDocs(collection(db, "NewsEvent"));
+  getNewsEvent.forEach((doc) => {
+    var appendDiv = document.createElement("div");
+    appendDiv.className = "event_content"
+    appendDiv.id = `event_${doc.id}`
+    appendDiv.style = doc.data().background
+
+    var EventDate = doc.data().date
+    var EventContent = doc.data().content
+
+    appendDiv.innerHTML = `
+    <div class="event_title">
+        <p id="event_date">${EventDate}</p>
+        <p id="event_title">${EventContent}</p>
+    </div>
+    `
+    append.push(appendDiv)
+  });
+
+  append.reverse().forEach((div) =>
+  {document.getElementById("event_div").appendChild(div)})
+
+  getNewsEvent.forEach((doc) => {
+    getDownloadURL(ref(storage, doc.data().src)).then((url) => {
+      document.getElementById(`event_${doc.id}`).style =
+      `${doc.data().background} background-image: url(${url})`
+    }).catch((error) => { console.error('이미지 다운로드 실패:', error);});
+  });
