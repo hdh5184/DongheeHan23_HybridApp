@@ -29,4 +29,3 @@ const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(port, () => {
   console.log(`Server is running on https://localhost:${port}`);
 });
-
