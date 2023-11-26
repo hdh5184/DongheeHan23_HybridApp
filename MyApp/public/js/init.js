@@ -69,7 +69,6 @@ function getData(){
   
       useCups++
     });
-    console.log(useCups, plasticCupUsed, reusableCupUsed, discountAmount, benefitAmount)
     document.getElementById("cupA").innerText = plasticCupUsed + "개"
     document.getElementById("cupB").innerText = reusableCupUsed + "개"
     document.getElementById("amount_discount").innerText = discountAmount + "원"
@@ -113,9 +112,7 @@ if(isLogged){
       var ReusableBarPercent = 90
       var plasticBarPercent = (getplasticCount / getReusableCount) * 90
     }
-    console.log(plasticBarPercent, ReusableBarPercent)
     
-
     appendDiv.innerHTML = `
     <p id="history_cup_month">${getYear}년 ${getMonth}월</p>
     <div class="history_cup_used" id="used_cupA">
@@ -128,49 +125,41 @@ if(isLogged){
       style = "width : ${ReusableBarPercent}%"></div>
       <span id="used_cup">${getReusableCount}</span>
     </div>
-    `;
-    append.push([appendDiv, doc.id])
-    console.log(append)
+    `
+    append.push(appendDiv)
   })
 
-  append.reverse().forEach(([div, id]) =>
+  append.reverse().forEach((div) =>
   {document.getElementById("history_cup").appendChild(div)})
-  
+
+  var append = []
+
+  const getNewsBenefit = await getDocs(collection(db, "NewsBenefit"));
+  getNewsBenefit.forEach((doc) => {
+    var appendDiv = document.createElement("div");
+    appendDiv.className = "news_content"
+    appendDiv.style = doc.data().background
+
+    var BenefitDate = doc.data().date
+    var BenefitContent = doc.data().content
+
+    appendDiv.innerHTML = `
+    <div class="news_title">
+      <p id="news_date">${BenefitDate}</p>
+      <p id="news_title">${BenefitContent}</p>
+      </div>
+    <div class="news_img" id="${doc.id}"></div>
+    `
+    append.push(appendDiv)
+  });
+
+  append.reverse().forEach((div) =>
+  {document.getElementById("news_div").appendChild(div)})
+
+  getNewsBenefit.forEach((doc) => {
+    getDownloadURL(ref(storage, doc.data().src)).then((url) => {
+      document.getElementById(doc.id).style = `background-image: url(${url})`
+    }).catch((error) => { console.error('이미지 다운로드 실패:', error);});
+  });
+
 }
-
-
-
-
-
-
-// var washingtonRef = doc(db, "User", "userTest@email.com", "UseCupHistory", "12345");
-
-// // Set the "capital" field of the city 'DC'
-// // await updateDoc(washingtonRef, {
-// //   testtest : [124,14]
-// // });
-
-// //데이터 추가하기
-// await setDoc(washingtonRef, {
-//     testtest : [124,14]
-//   });
-
-// var washingtonRef = doc(db, "User", "y298rey2938r");
-
-//             // Set the "capital" field of the city 'DC'
-//             // await updateDoc(washingtonRef, {
-//             //   testtest : [124,14]
-//             // });
-
-//             //데이터 추가하기
-//             await setDoc(washingtonRef, {});
-
-// var washingtonRef = doc(db, "User", "y298rey2938r", "UseCupHistory", "23456");
-
-//             // Set the "capital" field of the city 'DC'
-//             // await updateDoc(washingtonRef, {
-//             //   testtest : [124,14]
-//             // });
-
-//             //데이터 추가하기
-//             await setDoc(washingtonRef, { });

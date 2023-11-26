@@ -13,7 +13,7 @@
     <div id="undo">이전</div>
 
 
-    <div id="mainPage" style="display: none;">
+    <div id="mainPage" style="display: contents;">
         <div id="header_main">
             <div id="header_history">
                 <div class="header_history_cup" id="header_history_cupA">
@@ -160,51 +160,19 @@
 
 
     <div id="newsPage" style="display: none;">
-        <a href="" id="undo">이전</a>
+        <div id="exit_news">이전</div>
         <div id="header_news">
             <div class="category" id="category_benefit">혜택 찾아보기</div>
             <div class="category" id="category_event">이벤트 찾아보기</div>
         </div>
         <div id="middle_news">
             <div id="news">
-                <div class="news_div" id="news_23">
-                    <p id="news_year">2023년</p>
-                    <div class="news_content" id="news_230105">
-                        <div class="news_title">
-                            <p id="news_date">2023년 01월 05일</p>
-                            <p id="news_title">OO카페 다회용 컵 이용 혜택 400원으로 인상!</p>
-                        </div>
-                        <div id="news_img"></div>
-                    </div>
-                    <div class="news_content" id="news_230105">
-                        <div class="news_title">
-                            <p id="news_date">2023년 01월 03일</p>
-                            <p id="news_title">OO카페 텀블러 이용만 해도 다양한 혜택이?</p>
-                        </div>
-                        <div id="news_img"></div>
-                    </div>
-                    <div class="news_content" id="news_230105">
-                        <div class="news_title">
-                            <p id="news_date">2023년 01월 01일</p>
-                            <p id="news_title">AA카페 새해 기념 이번달까지 개인 컵 사용 할인 인상!</p>
-                        </div>
-                        <div id="news_img"></div>
-                    </div>
-                </div>
-                <div class="news_div" id="news_22">
-                    <p id="news_year">2022년</p>
-                    <div class="news_content" id="news_221228">
-                        <div class="news_title">
-                            <p id="news_date">2022년 12월 28일</p>
-                            <p id="news_title">Yee버거 연말 기념 음료 포장 할인 인상</p>
-                        </div>
-                        <div id="news_img"></div>
-                    </div>
+                <div id="news_div">
                 </div>
             </div>
     
             <div id="event">
-                <div class="event_div" id="event_23">
+                <div id="event_div" id="event_23">
                     <p id="event_year">2023년</p>
                     <div class="event_content" id="event_230101">
                         <div class="event_title">
@@ -214,7 +182,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="event_div" id="event_22">
+                <div id="event_div" id="event_22">
                     <p id="event_year">2022년</p>
                     <div class="event_content" id="event_221225">
                         <div class="event_title">
@@ -256,7 +224,7 @@
         </div>
     </div>
 
-    <div id="sharePage" style="display: contents;">
+    <div id="sharePage" style="display: none;">
         <div id="exit_share">이전</div>
         <div id="header_share">
             <div id="select_photo">
@@ -292,6 +260,7 @@
     <script type="module" src="public/js/login.js"></script>
     <script type="module" src="public/js/init.js"></script>
     <script type="module" src="public/js/addCup.js"></script>
+    <script type="module" src="public/js/news.js"></script>
     <script type="module" src="public/js/share.js"></script>
 </body>
 </html>
