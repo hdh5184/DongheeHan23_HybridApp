@@ -155,6 +155,7 @@ if(isLogged){
 
 //뉴스 정보 가져오기
 var append = []
+var benefit = []
 
 const getNewsBenefit = await getDocs(collection(db, "NewsBenefit"));
 getNewsBenefit.forEach((doc) => {
@@ -174,6 +175,7 @@ getNewsBenefit.forEach((doc) => {
   <div class="news_img" id="${doc.id}"></div>
   `
   append.push(appendDiv)
+  benefit.push(doc.data())
 });
 
 append.reverse().forEach((div) =>
@@ -185,7 +187,8 @@ getNewsBenefit.forEach((doc) => {
   }).catch((error) => { console.error('이미지 다운로드 실패:', error);});
 });
 
-
+const benefitData = benefit
+export { benefitData }
 
 //이벤트 정보 가져오기
 var append = []
@@ -215,7 +218,6 @@ getNewsEvent.forEach((doc) => {
 append.reverse().forEach((div) =>
 {document.getElementById("event_div").appendChild(div)})
 
-var count = 0
 getNewsEvent.forEach((doc) => {
   getDownloadURL(ref(storage, doc.data().src)).then((url) => {
     document.getElementById(`event_${doc.id}`).style =

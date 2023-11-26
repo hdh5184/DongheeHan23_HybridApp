@@ -1,4 +1,4 @@
-import { eventData } from "./init.js"
+import { benefitData, eventData } from "./init.js"
 
 $("#NewsCurrent").click((event) => { $("#mainPage").hide(); $("#newsPage").show() })
 $("#exit_news").click((event) => { $("#newsPage").hide(); $("#mainPage").show() })
@@ -39,7 +39,12 @@ $(".news_content").click((event)=>{
 
         if (isInsideParent) selectId = element.id; return
     });
-    console.log(selectId)
+    
+    benefitData.forEach((data) => {
+        if(selectId == `news_${data.id}`){
+            window.open(data.link, '_blank')
+        }
+    })
 })
 
 //이벤트 목록 내용 확인
@@ -70,12 +75,12 @@ $(".event_content").click((event)=>{
         if (isInsideParent) selectId = element.id; return
     });
 
-    console.log(selectId)
 
     eventData.forEach((data) => {
         if(selectId == `event_${data.id}`){
             var appendDiv = document.createElement("div");
             appendDiv.className = "news_detail"
+            appendDiv.id = selectId
             appendDiv.style = data.background
             appendDiv.style.backgroundImage =
             document.getElementById(selectId).style.backgroundImage
@@ -101,3 +106,14 @@ $(".event_content").click((event)=>{
     })
 })
 
+$("#news_detail_button").click((event) => {
+    const compare = document.querySelector('.news_detail').id
+    const compareId = compare.slice(6)
+    console.log(compareId)
+
+    eventData.forEach((data) => {
+        if(compareId == data.id){
+            window.open(data.link, '_blank')
+        }
+    })
+})
