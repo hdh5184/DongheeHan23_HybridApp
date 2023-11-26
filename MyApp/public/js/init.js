@@ -42,13 +42,15 @@ if(isLogged){
 }
 
 let currentMonth = {currentPlasticCount: 0, currentReusableCount: 0}
+
+let useCups = 0
+let plasticCupUsed = 0, reusableCupUsed = 0
+let discountAmount = 0, benefitAmount = 0
+
 await getData()
 
 function getData(){
   if(isLogged){
-    let useCups = 0
-    let plasticCupUsed = 0, reusableCupUsed = 0
-    let discountAmount = 0, benefitAmount = 0
     
     addUserContent.forEach(async (doc) => {
       var date = new Date(doc.id)
@@ -75,6 +77,14 @@ function getData(){
   }
 }
 
+const MyKeyword =
+  {
+    reusable : reusableCupUsed,
+    discount : discountAmount,
+    benefit : benefitAmount
+  }
+
+  export {MyKeyword}
 
 if(isLogged){
   await updateDoc(updateDataContent, {

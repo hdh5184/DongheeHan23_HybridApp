@@ -13,7 +13,7 @@
     <div id="undo">이전</div>
 
 
-    <div id="mainPage" style="display: contents;">
+    <div id="mainPage" style="display: none;">
         <div id="header_main">
             <div id="header_history">
                 <div class="header_history_cup" id="header_history_cupA">
@@ -256,8 +256,8 @@
         </div>
     </div>
 
-    <div id="sharePage" style="display: none;">
-        <a href="#" id="undo">이전</a>
+    <div id="sharePage" style="display: contents;">
+        <div id="exit_share">이전</div>
         <div id="header_share">
             <div id="select_photo">
                 <img id="shareImg" alt="카메라" width="40%" height="40%">
@@ -267,21 +267,17 @@
         <div id="middle_share">
             <div id="select_keyword">
                 <p>알리고 싶은 키워드를 선택하세요!</p>
-                <ul id="select_keyword_list">
-                    <li id="select1">❖ 사용한 개인 컵 개수</li>
-                    <li id="select2">❖ 줄인 일회용 컵 개수</li>
-                    <li id="select3">❖ 도전한 개인 컵 횟수</li>
-                    <li id="select4">❖ 지금까지 받은 혜택</li>
-                    <li id="select5">❖ 지금까지 아낀 금액</li>
-                </ul>
-            </div>
-            <div id="select_color">
-                <span>색 선택</span>
-                <div id="select_color_div"></div>
+                <div id="select_keyword_list">
+                    <label><input type="radio" name="selectKeyword" value="1" checked>사용한 개인 컵 개수</label>
+                    <label><input type="radio" name="selectKeyword" value="2">줄인 일회용 컵 개수</label>
+                    <label><input type="radio" name="selectKeyword" value="3">도전한 개인 컵 횟수</label>
+                    <label><input type="radio" name="selectKeyword" value="4">지금까지 받은 혜택</label>
+                    <label><input type="radio" name="selectKeyword" value="5">지금까지 아낀 금액</label>
+                </div>
             </div>
         </div>
         <div id="footer_share">
-            <a href="#" id="share_button">공유하기</a>
+            <div id="share_button">공유하기</div>
         </div>
     </div>
 
